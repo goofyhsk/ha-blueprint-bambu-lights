@@ -1,0 +1,38 @@
+blueprint:
+  name: Bambu Lab Zigbee RGB Light Controller
+  description: Control one or more Zigbee RGB lights with Bambu 3d printer
+  domain: automation
+  input:
+    printer_status:
+      name: Print Status of your Bambu Lab printer
+      description: "Select the print status entity."
+      selector:
+        entity:
+          filter:
+            domain: sensor
+            integration: bambu_lab
+    current_stage:
+      name: Current Stage of your Bambu Lab Printer
+      description: "Select the printer current stage entity."
+      selector:
+        entity:
+          filter:
+            domain: sensor
+            integration: bambu_lab
+    chamber_light:
+      name: Chamber Light of your Bambu Lab Printer
+      description: "Select the printer chamber light entity."
+      selector:
+        entity:
+          filter:
+            domain: light
+            integration: bambu_lab
+    zha_lights:
+      name: Zigbee RGB Light devices
+      description: "Select the Zigbee RGB light devices you wish to control."
+      selector:
+        device:
+          filter:
+            integration: zha
+          multiple: true
+
