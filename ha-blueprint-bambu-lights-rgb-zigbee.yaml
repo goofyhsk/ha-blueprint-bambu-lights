@@ -36,3 +36,49 @@ blueprint:
             integration: zha
           multiple: true
 
+alias Bambu Lab Light Controller
+description: "Control one of more Zigbee RGB Lights with Bambu 3D Printer"
+trigger:
+  - platform: state
+    entity_id:
+      - !input chamber_light
+      - !input printer_status
+      - !input current_stage
+    alias: When current stage, printer status or chamber light state changes
+condition: []
+action:
+  - if
+    - condition: state
+      state: "on"
+      alias: chamber light is on
+      entity_id: !input chamber_light
+    - condition: not
+      conditions:
+          - condition: state
+            entity_id: !input current_stage
+            state: scanning_bed_surface
+            alias: Scanning Bed Surface
+          - condition: state
+            entity_id: !input current_stage
+            state: cleaning_nozzle_tip
+            alias: Cleaning Nozzle Tip
+          - condition: state
+            entity_id: !input current_stage
+            state: calibrating_extrusion
+            alias: Calibrating Extrusion
+          - condition: state
+            entity_id: !input current_stage
+            state: calibrating_extrusion_flow
+            alias: Calibrating Extrusion Flow
+          - condition: state
+            entity_id: !input current_stage
+            state: offline
+            alias: Printer is offline
+          - condition: state
+            entity_id: !input printer_status
+            state: offline
+            alias: Printer is offline
+          - condition: state
+            entity_id: !input current_stage
+            state: calibrating_micro_lidar
+            alias: Calibrating Micro Lidar
